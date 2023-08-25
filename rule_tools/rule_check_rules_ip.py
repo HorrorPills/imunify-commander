@@ -1,5 +1,6 @@
 import subprocess
 import re
+import config
 
 def search_modsec_ids(ip_address):
     try:
