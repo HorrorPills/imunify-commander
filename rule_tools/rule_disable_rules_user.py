@@ -5,15 +5,8 @@ def append_rules_to_file(file_path, rule_ids):
     # Prepare the content to append
     append_content = '\n'.join([f'SecRuleRemoveById {rule_id}' for rule_id in rule_ids])
 
-    # Read the existing file content
-    with open(file_path, 'r') as file:
-        existing_content = file.read()
-
-    # Modify the existing content to include the appended rules
-    modified_content = existing_content.replace('</IfModule>', f'{append_content}\n</IfModule>')
-
-    # Write the modified content back to the file using a shell command
-    os.system(f"sudo echo '{modified_content}' | sudo tee {file_path}")
+    # Use the sed command to replace the </IfModule> tag with appended content and </IfModule> tag
+    os.system(f"sudo sed -i '/<IfModule mod_security2.c>/,/<\\/IfModule>/ s/<\\/IfModule>/{append_content}\\n<\\/IfModule>/' {file_path}")
 
 def main():
     os.system('clear')
@@ -37,15 +30,15 @@ def main():
         os.system(f"sudo chmod 755 {folder_path}")
 
     if not os.path.exists(file_path):
-        os.system(f"sudo echo '<IfModule mod_security2.c>\n</IfModule>\n' | sudo tee {file_path}")
+        os.system(f"echo '<IfModule mod_security2.c>\n</IfModule>\n' | sudo tee {file_path}")
 
     append_rules_to_file(file_path, rule_ids)
 
     print("+-------------------------------------------+")
     print("Rebuild httpd configuration?")
     print(" ")
-    print("1. Rebuild httpd configuration")
-    print("2. Skip rebuilding httpd configuration")
+    print("1. Yes")
+    print("2. No")
     print("+-------------------------------------------+")
     rebuild_choice = input("Choose number: ")
     
