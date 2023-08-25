@@ -1,4 +1,5 @@
 import subprocess
+import os
 
 def is_ip_in_blacklist(ip_address):
     try:
@@ -19,11 +20,12 @@ def run_check_ip_menu():
         ip_address = input("Enter IP address (or 'q' to quit): ")
         
         if ip_address.lower() == 'q':
-            break
-        
+             ip_tools_menu.show_menu()
+            
         is_blacklisted = is_ip_in_blacklist(ip_address)
         is_whitelisted = is_ip_in_whitelist(ip_address)
-
+        
+        os.system('clear')
         print("+-------------------------------------------+")
         print(f"Status for {ip_address}")
         print("+-------------------------------------------+")
