@@ -2,6 +2,7 @@
 
 import subprocess
 import config  # Import the VERSION variable from config.py
+import os
 
 def start_malware_scan(path):
     try:
@@ -11,7 +12,12 @@ def start_malware_scan(path):
         print("An error occurred while starting the malware scan.")
 
 def run_scan_menu():
+    os.system('clear')
     print("")
+    print("+-------------------------------------------+")
+    print(f"IMUNIFY-COMMANDER {config.VERSION} | WEBD.pl")
+    print("+-------------------------------------------+")
+    print("SCAN TOOLS | SCAN CUSTOM PATH")
     print("+-------------------------------------------+")
     path = input("Enter path to scan: ")
     start_malware_scan(path)

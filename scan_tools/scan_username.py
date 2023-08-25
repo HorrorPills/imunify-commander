@@ -2,6 +2,7 @@
 
 import subprocess
 import config  # Import the VERSION variable from config.py
+import os
 
 def start_malware_scan(username):
     try:
@@ -11,7 +12,12 @@ def start_malware_scan(username):
         print("An error occurred while starting the malware scan.")
 
 def run_scan_menu():
+    os.system('clear')
     print("")
+    print("+-------------------------------------------+")
+    print(f"IMUNIFY-COMMANDER {config.VERSION} | WEBD.pl")
+    print("+-------------------------------------------+")
+    print("SCAN TOOLS | SCAN USERNAME")
     print("+-------------------------------------------+")
     username = input("Enter Username: ")
     start_malware_scan(username)
@@ -27,7 +33,7 @@ def run_scan_menu():
         import main
         main.show_menu()
     elif choice == "2":
-        print("Exiting IMUNIFY-COMMANDER. Goodbye!")
+        print(" ")
     else:
         print("Invalid choice. Please choose a valid option.")
         run_scan_menu()
