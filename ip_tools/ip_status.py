@@ -18,6 +18,7 @@ def is_ip_in_whitelist(ip_address):
 def run_check_ip_menu():
     while True:
         ip_address = input("Enter IP address (or 'q' to quit): ")
+        print(f'Checking {ip_address}...')
         
         if ip_address.lower() == 'q':
             import ip_tools.ip_tools_menu as ip_tools_menu
@@ -39,7 +40,6 @@ def run_check_ip_menu():
         choice = input("Choose number: ")
 
         if choice == "1":
-            print(f'Checking {ip_address}...')
             continue
         elif choice == "2":
             import ip_tools.ip_tools_menu as ip_tools_menu
