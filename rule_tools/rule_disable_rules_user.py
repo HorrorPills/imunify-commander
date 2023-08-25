@@ -39,19 +39,18 @@ def main():
     folder_path = f'/usr/local/apache/conf/userdata/{username}'
     file_path = f'{folder_path}/{username}.conf'
 
-    if not os.system(f"sudo test -d {folder_path}"):
+    if not os.path.exists(folder_path):
         os.system(f"sudo mkdir -p {folder_path}")
         os.system(f"sudo chmod 755 {folder_path}")
-    
+
     if not os.path.exists(file_path):
-        os.system(f"sudo sh -c 'echo \"<IfModule mod_security2.c>\" > {file_path}'")
-        os.system(f"sudo sh -c 'echo \"</IfModule>\" >> {file_path}'")
+        with open(file_path, 'w') as file:
+            file.write('<IfModule mod_security2.c>\n</IfModule>\n')
 
     append_rules_to_file(file_path, rule_ids)
 
     print("+-------------------------------------------+")
     print("Rebuild httpd configuration?")
-    print(" ")
     print("1. Yes")
     print("2. No")
     print("+-------------------------------------------+")
