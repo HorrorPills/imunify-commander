@@ -19,10 +19,10 @@ def show_menu():
     choice = input("Choose number: ")
     
     if choice == "1":
-        import ip.tools.ip_status as ip_status
+        import ip_tools.ip_status as ip_status
         ip_status.run_check_ip_menu()
     elif choice == "2":
-        import ip.tools.ip_list_control as ip_list_control
+        import ip_tools.ip_list_control as ip_list_control
         ip_list_control()
     elif choice == "3":
         import main as main
