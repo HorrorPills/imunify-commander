@@ -22,8 +22,8 @@ def show_menu():
         os.system('clear')
         rule_check_rules_ip.run_check_rules_menu()
     elif choice == "2":
-        import ip_tools.ip_list_control as ip_list_control
-        ip_list_control.show_list_control_menu()
+        import rule_tools.rule_disable_rules_user as disable_rules_user
+        disable_rules_user.main()
     elif choice == "3":
         import main as main
         main.show_menu()
