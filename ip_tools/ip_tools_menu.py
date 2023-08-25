@@ -19,7 +19,7 @@ def show_menu():
     choice = input("Choose number: ")
     
     if choice == "1":
-        import ip_status as ip_status
+        import ip_tools.ip_status as ip_status
         ip_status.run_check_ip_menu()
     elif choice == "2":
         import rule_tools.rule_checkrules as rule_checkrules
