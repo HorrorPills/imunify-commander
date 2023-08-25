@@ -2,25 +2,13 @@ import os
 import config
 
 def append_rules_to_file(file_path, rule_ids):
-    with open(file_path, 'r+') as file:
-        lines = file.readlines()
-        file.seek(0)
-        inside_block = False
+    # Prepare the content to append
+    append_content = ""
+    for rule_id in rule_ids:
+        append_content += f'SecRuleRemoveById {rule_id}\n'
 
-        for line in lines:
-            if line.strip() == '<IfModule mod_security2.c>':
-                inside_block = True
-                file.write(line)
-            elif line.strip() == '</IfModule>':
-                inside_block = False
-                file.write('\n')  # Add a newline before appending new rules
-                for rule_id in rule_ids:
-                    file.write(f'SecRuleRemoveById {rule_id}\n')
-                file.write(line)
-            elif inside_block:
-                file.write(line)
-            else:
-                file.write(line)
+    # Append the content using a shell command
+    os.system(f"echo '{append_content}' | sudo tee -a {file_path}")
 
 def main():
     os.system('clear')
@@ -44,13 +32,13 @@ def main():
         os.system(f"sudo chmod 755 {folder_path}")
 
     if not os.path.exists(file_path):
-        with open(file_path, 'w') as file:
-            file.write('<IfModule mod_security2.c>\n</IfModule>\n')
+        os.system(f"echo '<IfModule mod_security2.c>\n</IfModule>\n' | sudo tee {file_path}")
 
     append_rules_to_file(file_path, rule_ids)
 
     print("+-------------------------------------------+")
     print("Rebuild httpd configuration?")
+    print(" ")
     print("1. Yes")
     print("2. No")
     print("+-------------------------------------------+")
