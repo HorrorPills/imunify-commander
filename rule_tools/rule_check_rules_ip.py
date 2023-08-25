@@ -1,6 +1,5 @@
 import subprocess
 import re
-#from rule_tools.rules_disable_rules_user import disable_rule_for_account
 
 def search_modsec_ids(ip_address):
     try:
