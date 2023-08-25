@@ -3,7 +3,7 @@ import os
 import config  # Import the VERSION variable from config.py
 
 def show_menu():
-    os.system('clear')
+    os.system('cls')
     print("")
     print("+-------------------------------------------+")
     print(f"IMUNIFY-COMMANDER {config.VERSION} | WEBD.pl")
