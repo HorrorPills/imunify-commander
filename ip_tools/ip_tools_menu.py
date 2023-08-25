@@ -1,7 +1,9 @@
-# menu.py
+# ip_tools_menu.py
 import os
-
-import config  # Import the VERSION variable from config.py
+import config
+import ip_tools.ip_status as ip_status
+import ip_tools.ip_list_control as ip_list_control
+import main as main
 
 def show_menu():
     os.system('clear')
@@ -19,13 +21,10 @@ def show_menu():
     choice = input("Choose number: ")
     
     if choice == "1":
-        import ip_tools.ip_status as ip_status
         ip_status.run_check_ip_menu()
     elif choice == "2":
-        import ip_tools.ip_list_control as ip_list_control
-        ip_list_control()
+        ip_list_control.show_list_control_menu()  # Call the function, not the module
     elif choice == "3":
-        import main as main
         main.show_menu()
     else:
         print("Invalid choice. Please choose a valid option.")
