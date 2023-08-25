@@ -18,8 +18,8 @@ def show_menu():
     choice = input("Choose number: ")
     
     if choice == "1":
-        import rule_tools.rule_checkrules as rule_checkrules
-        rule_checkrules.run_check_rules_menu()
+        import rule_tools.rule_check_rules_ip as rule_check_rules_ip
+        rule_check_rules_ip.run_check_rules_menu()
     elif choice == "2":
         import ip_tools.ip_list_control as ip_list_control
         ip_list_control.show_list_control_menu()
