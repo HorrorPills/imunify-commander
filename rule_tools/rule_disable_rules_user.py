@@ -2,25 +2,9 @@ import os
 import config
 
 def append_rules_to_file(file_path, rule_ids):
-    with open(file_path, 'r+') as file:
-        lines = file.readlines()
-        file.seek(0)
-        inside_block = False
-
-        for line in lines:
-            if line.strip() == '<IfModule mod_security2.c>':
-                inside_block = True
-                file.write(line)
-            elif line.strip() == '</IfModule>':
-                inside_block = False
-                file.write('\n')  # Add a newline before appending new rules
-                for rule_id in rule_ids:
-                    file.write(f'SecRuleRemoveById {rule_id}\n')
-                file.write(line)
-            elif inside_block:
-                file.write(line)
-            else:
-                file.write(line)
+    for rule_id in rule_ids:
+        command = f"echo 'SecRuleRemoveById {rule_id}' | sudo tee -a {file_path} > /dev/null"
+        os.system(command)
 
 def main():
     os.system('clear')
@@ -39,8 +23,8 @@ def main():
     file_path = f'/usr/local/apache/conf/userdata/{username}/{username}.conf'
 
     if not os.path.exists(file_path):
-        with open(file_path, 'w') as file:
-            file.write('<IfModule mod_security2.c>\n</IfModule>\n')
+        os.system(f"echo '<IfModule mod_security2.c>' | sudo tee {file_path} > /dev/null")
+        os.system(f"echo '</IfModule>' | sudo tee -a {file_path} > /dev/null")
 
     append_rules_to_file(file_path, rule_ids)
 
