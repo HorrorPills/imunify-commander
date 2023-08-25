@@ -22,7 +22,7 @@ def show_menu():
         import rule_tools.rule_tools_menu as rule_tools_menu
         rule_tools_menu.show_menu()
     elif choice == "3":
-        import scan_tools.scan_tools.scan_tools_menu as scan_tools_menu
+        import scan_tools.scan_tools_menu as scan_tools_menu
         scan_tools_menu.show_menu()
     else:
         print("Invalid choice. Please choose a valid option.")
