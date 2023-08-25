@@ -20,7 +20,7 @@ def run_check_ip_menu():
         ip_address = input("Enter IP address (or 'q' to quit): ")
         
         if ip_address.lower() == 'q':
-            break
+            ip_tools.ip_tools_menu.show_menu()
         
         is_blacklisted = is_ip_in_blacklist(ip_address)
         is_whitelisted = is_ip_in_whitelist(ip_address)
@@ -38,10 +38,11 @@ def run_check_ip_menu():
         choice = input("Choose number: ")
 
         if choice == "1":
+            print(f'Checking {ip_address}...')
             continue
         elif choice == "2":
             import ip_tools_menu as ip_tools_menu
-            ip_tools_menu.show_menu()
+            ip_tools.ip_tools_menu.show_menu()
             break
         else:
             print("Invalid choice. Please choose a valid option.")
