@@ -19,7 +19,7 @@ def run_check_ip_menu():
         ip_address = input("Enter IP address (or 'q' to quit): ")
         
         if ip_address.lower() == 'q':
-            continue
+            ip_tools_menu.show_menu()
         
         is_blacklisted = is_ip_in_blacklist(ip_address)
         is_whitelisted = is_ip_in_whitelist(ip_address)
