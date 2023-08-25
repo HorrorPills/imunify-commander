@@ -45,6 +45,12 @@ def extract_info_blocks(log_lines):
 
 
 def run_check_rules_menu():
+    print("")
+    print("+-------------------------------------------+")
+    print(f"IMUNIFY-COMMANDER {config.VERSION} | WEBD.pl")
+    print("+-------------------------------------------+")
+    print("RULE TOOLS | CHECK RULES")
+    print("+-------------------------------------------+")
     ip_address = input("Enter IP address: ")
 
     modsec_ids = search_modsec_ids(ip_address)
