@@ -42,7 +42,7 @@ def show_list_control_menu(ip_address):
             action = "remove"
         elif choice == "3":
             import ip_tools_menu
-            ip_tools_menu.show_menu()
+        ip_tools_menu.show_menu()
             break
         else:
             print("Invalid choice. Please choose a valid option.")
