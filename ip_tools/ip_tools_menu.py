@@ -23,7 +23,7 @@ def show_menu():
         ip_status.run_check_ip_menu()
     elif choice == "2":
         import ip_tools.ip_list_control as ip_list_control
-        ip_list_control()
+        ip_list_control.show_list_control_menu()
     elif choice == "3":
         import main as main
         main.show_menu()
