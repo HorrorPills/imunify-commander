@@ -19,6 +19,7 @@ def show_menu():
     
     if choice == "1":
         import rule_tools.rule_check_rules_ip as rule_check_rules_ip
+        os.system('clear')
         rule_check_rules_ip.run_check_rules_menu()
     elif choice == "2":
         import ip_tools.ip_list_control as ip_list_control
