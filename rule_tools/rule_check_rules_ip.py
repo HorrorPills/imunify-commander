@@ -67,18 +67,13 @@ def run_check_rules_menu():
 
     print("+-------------------------------------------+")
     print("Options:")
-    print("1. Disable Rule by ID for an User")
-    print("2. Back")
+    print("1. Back")
     print("+-------------------------------------------+")
     choice = input("Choose number: ")
 
-    if choice == "1":
-        
-        disable_rule_for_account(username, rule_id)
-        run_check_rules_menu()  # Return to the options
-    elif choice == "2":
-        import main
-        main.show_menu()
+    if choice == "1":     
+        import rule_tools.rule_tools_menu as rule_tools_menu
+        rule_tools_menu.show_menu()
     else:
         print("Invalid choice. Please choose a valid option.")
         run_check_rules_menu()
