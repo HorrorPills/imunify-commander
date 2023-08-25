@@ -14,6 +14,7 @@ def remove_ip_from_whitelist(ip_address):
 
 def show_list_control_menu(ip_address):
     while True:
+        os.system('clear')
         print(f"Options for {ip_address}")
         print("+-------------------------------------------+")
         print("1. Add")

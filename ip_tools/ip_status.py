@@ -1,4 +1,5 @@
 import subprocess
+import os
 
 def is_ip_in_blacklist(ip_address):
     try:
@@ -24,6 +25,7 @@ def run_check_ip_menu():
         is_blacklisted = is_ip_in_blacklist(ip_address)
         is_whitelisted = is_ip_in_whitelist(ip_address)
 
+        os.system('clear')
         print("+-------------------------------------------+")
         print(f"Status for {ip_address}")
         print("+-------------------------------------------+")
