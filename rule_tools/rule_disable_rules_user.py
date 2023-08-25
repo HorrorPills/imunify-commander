@@ -1,4 +1,5 @@
 import os
+import config
 
 def append_rules_to_file(file_path, rule_ids):
     with open(file_path, 'r+') as file:
@@ -22,8 +23,17 @@ def append_rules_to_file(file_path, rule_ids):
                 file.write(line)
 
 def main():
+    os.system('clear')
+    print("")
+    print("+-------------------------------------------+")
+    print(f"IMUNIFY-COMMANDER {config.VERSION} | WEBD.pl")
+    print("+-------------------------------------------+")
+    print("RULE TOOLS | DISABLE RULE ID")
+    print("+-------------------------------------------+")
     username = input("Enter username: ")
-    rule_ids_input = input("Enter Rule ID's to disable (space-separated): ")
+    print("+-------------------------------------------+")
+    rule_ids_input = input(f"Enter Rule ID's to disable for {username} (space-separated): ")
+    print("+-------------------------------------------+")
     rule_ids = rule_ids_input.split()
 
     file_path = f'/usr/local/apache/conf/userdata/{username}/{username}.conf'
@@ -34,9 +44,19 @@ def main():
 
     append_rules_to_file(file_path, rule_ids)
 
-    rebuild_config = input("Rebuild httpd configuration? (yes/no): ")
-    if rebuild_config.lower() == 'yes':
+    print("+-------------------------------------------+")
+    print("Rebuild httpd configuration?")
+    print("1. Yes")
+    print("2. No")
+    print("+-------------------------------------------+")
+    rebuild_choice = input("Choose number: ")
+    
+    if rebuild_choice == "1":
         os.system('sudo /scripts/rebuildhttpdconf')
+    elif rebuild_choice == "2":
+        print("Skipping httpd configuration rebuild.")
+    else:
+        print("Invalid choice. Please choose a valid option.")
 
 if __name__ == "__main__":
     main()
