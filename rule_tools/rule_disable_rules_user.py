@@ -13,7 +13,7 @@ def append_rules_to_file(file_path, rule_ids):
     modified_content = existing_content.replace('</IfModule>', f'{append_content}\n</IfModule>')
 
     # Write the modified content back to the file using a shell command
-    os.system(f"echo '{modified_content}' | sudo tee {file_path}")
+    os.system(f"sudo echo '{modified_content}' | sudo tee {file_path}")
 
 def main():
     os.system('clear')
@@ -37,7 +37,7 @@ def main():
         os.system(f"sudo chmod 755 {folder_path}")
 
     if not os.path.exists(file_path):
-        os.system(f"echo '<IfModule mod_security2.c>\n</IfModule>\n' | sudo tee {file_path}")
+        os.system(f"sudo echo '<IfModule mod_security2.c>\n</IfModule>\n' | sudo tee {file_path}")
 
     append_rules_to_file(file_path, rule_ids)
 
