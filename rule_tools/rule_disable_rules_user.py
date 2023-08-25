@@ -44,8 +44,8 @@ def main():
 
     append_rules_to_file(file_path, rule_ids)
 
-    print("+-------------------------------------------+")
     print("Rebuild httpd configuration?")
+    print(" ")
     print("1. Yes")
     print("2. No")
     print("+-------------------------------------------+")
@@ -54,8 +54,8 @@ def main():
     if rebuild_choice == "1":
         os.system('sudo /scripts/rebuildhttpdconf')
     elif rebuild_choice == "2":
-        import rule_tools.rule_disable_rules_user as disable_rules_user
-        disable_rules_user.main()
+        import rule_tools.rule_tools_menu as rule_tools_menu
+        rule_tools_menu.show_menu()
     else:
         print("Invalid choice. Please choose a valid option.")
 
