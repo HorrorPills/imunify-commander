@@ -28,6 +28,11 @@ def run_check_ip_menu():
         is_whitelisted = is_ip_in_whitelist(ip_address)
         
         os.system('clear')
+        print("")
+        print("+-------------------------------------------+")
+        print(f"IMUNIFY-COMMANDER {config.VERSION} | WEBD.pl")
+        print("+-------------------------------------------+")
+        print("IP TOOLS | STATUS")
         print("+-------------------------------------------+")
         print(f"Status for {ip_address}")
         print("+-------------------------------------------+")

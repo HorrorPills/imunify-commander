@@ -56,8 +56,8 @@ def show_list_control_menu():
             else:
                 print("Invalid choice. Please choose a valid option.")
         elif choice == "3":
+            import ip_tools.ip_tools_menu as ip_tools_menu
             ip_tools_menu.show_menu()
-            break
         else:
             print("Invalid choice. Please choose a valid option.")
 
