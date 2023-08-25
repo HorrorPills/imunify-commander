@@ -23,8 +23,8 @@ def main():
     file_path = f'/usr/local/apache/conf/userdata/{username}/{username}.conf'
 
     if not os.path.exists(file_path):
-        os.system(f"echo '<IfModule mod_security2.c>' | sudo tee {file_path} > /dev/null")
-        os.system(f"echo '</IfModule>' | sudo tee -a {file_path} > /dev/null")
+        os.system(f"sudo sh -c 'echo \"<IfModule mod_security2.c>\" > {file_path}'")
+        os.system(f"sudo sh -c 'echo \"</IfModule>\" >> {file_path}'")
 
     append_rules_to_file(file_path, rule_ids)
 
