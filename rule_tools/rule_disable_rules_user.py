@@ -44,8 +44,8 @@ def main():
     print("+-------------------------------------------+")
     print("Rebuild httpd configuration?")
     print(" ")
-    print("1. Yes")
-    print("2. No")
+    print("1. Rebuild httpd configuration")
+    print("2. Skip rebuilding httpd configuration")
     print("+-------------------------------------------+")
     rebuild_choice = input("Choose number: ")
     
