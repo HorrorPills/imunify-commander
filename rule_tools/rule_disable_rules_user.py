@@ -3,12 +3,17 @@ import config
 
 def append_rules_to_file(file_path, rule_ids):
     # Prepare the content to append
-    append_content = ""
-    for rule_id in rule_ids:
-        append_content += f'SecRuleRemoveById {rule_id}\n'
+    append_content = '\n'.join([f'SecRuleRemoveById {rule_id}' for rule_id in rule_ids])
 
-    # Append the content using a shell command
-    os.system(f"echo '{append_content}' | sudo tee -a {file_path}")
+    # Read the existing file content
+    with open(file_path, 'r') as file:
+        existing_content = file.read()
+
+    # Modify the existing content to include the appended rules
+    modified_content = existing_content.replace('</IfModule>', f'{append_content}\n</IfModule>')
+
+    # Write the modified content back to the file using a shell command
+    os.system(f"echo '{modified_content}' | sudo tee {file_path}")
 
 def main():
     os.system('clear')
