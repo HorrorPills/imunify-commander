@@ -12,7 +12,7 @@ def show_menu():
     print("+-------------------------------------------+")
     print("Menu:")
     print("1. Check Rules for IP")
-    print("2. Disable Rule ID for user")
+    print("2. Disable Rule by ID for a User")
     print("3. Back to Main Menu")
     print("+-------------------------------------------+")
     choice = input("Choose number: ")

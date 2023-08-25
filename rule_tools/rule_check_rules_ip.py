@@ -67,22 +67,18 @@ def run_check_rules_menu():
 
     print("+-------------------------------------------+")
     print("Options:")
-    print("2. Disable Rule by ID for an Account")
-    print("3. Return to Main Menu")
-    print("4. Exit")
+    print("1. Disable Rule by ID for an User")
+    print("2. Back")
     print("+-------------------------------------------+")
     choice = input("Choose number: ")
 
-    if choice == "2":
-        username = input("Enter username for the account: ")
-        rule_id = input("Enter ModSecurity Rule ID to disable for the account: ")
+    if choice == "1":
+        
         disable_rule_for_account(username, rule_id)
         run_check_rules_menu()  # Return to the options
     elif choice == "2":
         import main
         main.show_menu()
-    elif choice == "3":
-        print("Exiting IMUNIFY-COMMANDER. Goodbye!")
     else:
         print("Invalid choice. Please choose a valid option.")
         run_check_rules_menu()
