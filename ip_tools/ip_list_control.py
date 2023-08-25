@@ -1,4 +1,6 @@
 import subprocess
+import os
+import ip_tools_menu
 
 def add_ip_to_blacklist(ip_address):
     subprocess.run(f"sudo imunify360-agent blacklist ip add {ip_address}", shell=True)
@@ -12,7 +14,9 @@ def add_ip_to_whitelist(ip_address):
 def remove_ip_from_whitelist(ip_address):
     subprocess.run(f"sudo imunify360-agent whitelist ip delete {ip_address}", shell=True)
 
-def show_list_control_menu(ip_address):
+def show_list_control_menu():
+    os.system('clear')
+    ip_address = input("Enter IP address: ")
     while True:
         os.system('clear')
         print(f"Options for {ip_address}")
@@ -28,7 +32,6 @@ def show_list_control_menu(ip_address):
         elif choice == "2":
             action = "remove"
         elif choice == "3":
-            import ip_tools.ip_tools_menu as ip_tools_menu
             ip_tools_menu.show_menu()
             break
         else:
@@ -61,5 +64,4 @@ def show_list_control_menu(ip_address):
                 print("Invalid choice. Please choose a valid option.")
 
 if __name__ == "__main__":
-    ip_address = input("Enter IP address: ")
-    show_list_control_menu(ip_address)
+    show_list_control_menu()
