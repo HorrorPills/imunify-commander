@@ -1,4 +1,5 @@
 import subprocess
+import os
 #import ip_tools_menu
 
 def add_ip_to_blacklist(ip_address):
