@@ -1,5 +1,6 @@
 import subprocess
 import os
+import config
 
 def is_ip_in_blacklist(ip_address):
     try:

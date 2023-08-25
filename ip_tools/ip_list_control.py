@@ -1,5 +1,6 @@
 import subprocess
 import os
+import config
 #import ip_tools_menu
 
 def add_ip_to_blacklist(ip_address):
@@ -18,7 +19,7 @@ def show_list_control_menu():
     while True:
         os.system('clear')
         print("+-------------------------------------------+")
-        print("IMUNIFY-COMMANDER v.10 | WEBD.pl")
+        print(f"IMUNIFY-COMMANDER {config.VERSION} | WEBD.pl")
         print("+-------------------------------------------+")
         print("IP TOOLS | CONTROL")
         print("+-------------------------------------------+")

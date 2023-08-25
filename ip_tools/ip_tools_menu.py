@@ -1,7 +1,6 @@
 # menu.py
 import os
-
-import config  # Import the VERSION variable from config.py
+import config
 
 def show_menu():
     os.system('clear')
