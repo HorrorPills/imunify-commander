@@ -1,6 +1,5 @@
 import subprocess
-import os
-import ip_tools_menu
+import ip_status
 
 def add_ip_to_blacklist(ip_address):
     subprocess.run(f"sudo imunify360-agent blacklist ip add {ip_address}", shell=True)
@@ -14,11 +13,19 @@ def add_ip_to_whitelist(ip_address):
 def remove_ip_from_whitelist(ip_address):
     subprocess.run(f"sudo imunify360-agent whitelist ip delete {ip_address}", shell=True)
 
-def show_list_control_menu():
-    import ip_tools_menu  # Import locally to avoid circular import
+def show_ip_status(ip_address):
+    is_blacklisted = ip_status.is_ip_in_blacklist(ip_address)
+    is_whitelisted = ip_status.is_ip_in_whitelist(ip_address)
 
-    os.system('clear')
-    ip_address = input("Enter IP address: ")
+    print("")
+    print("+-------------------------------------------+")
+    print(f"Status for {ip_address}")
+    print("+-------------------------------------------+")
+    print(f"Blacklist: {is_blacklisted}")
+    print(f"Whitelist: {is_whitelisted}")
+    print("+-------------------------------------------+")
+
+def show_list_control_menu(ip_address):
     while True:
         os.system('clear')
         print(f"Options for {ip_address}")
@@ -34,16 +41,38 @@ def show_list_control_menu():
         elif choice == "2":
             action = "remove"
         elif choice == "3":
-            ip_tools_menu.show_menu()  # Use the locally imported module
+            import ip_tools_menu
+            ip_tools_menu.show_menu()
             break
         else:
             print("Invalid choice. Please choose a valid option.")
             continue
 
         if action == "add":
-            # ... (your existing code)
+            print("Adding IP to:")
+            print("1. Blacklist")
+            print("2. Whitelist")
+            print("+-------------------------------------------+")
+            action_choice = input("Choose number: ")
+            if action_choice == "1":
+                add_ip_to_blacklist(ip_address)
+            elif action_choice == "2":
+                add_ip_to_whitelist(ip_address)
+            else:
+                print("Invalid choice. Please choose a valid option.")
         elif action == "remove":
-            # ... (your existing code)
+            print("Removing IP from:")
+            print("1. Blacklist")
+            print("2. Whitelist")
+            print("+-------------------------------------------+")
+            action_choice = input("Choose number: ")
+            if action_choice == "1":
+                remove_ip_from_blacklist(ip_address)
+            elif action_choice == "2":
+                remove_ip_from_whitelist(ip_address)
+            else:
+                print("Invalid choice. Please choose a valid option.")
 
 if __name__ == "__main__":
-    show_list_control_menu()
+    ip_address = input("Enter IP address: ")
+    show_list_control_menu(ip_address)
