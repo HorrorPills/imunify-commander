@@ -4,18 +4,11 @@ import config
 
 def search_modsec_ids(ip_address):
     try:
-        log_lines = subprocess.check_output(f"sudo grep modsec /var/log/imunify360/console.log | grep {ip_address}", shell=True)
+        log_lines = subprocess.check_output(f"sudo grep -e 'modsec' -e 'INFO BLOCK' /var/log/imunify360/console.log | grep {ip_address}", shell=True)
         return log_lines.decode("utf-8").strip().split('\n')
     except subprocess.CalledProcessError:
         print("An error occurred while searching for ModSecurity IDs.")
         return []
-
-def whitelist_modsec_rule(rule_id):
-    try:
-        subprocess.run(f"sudo imunify360-agent whitelist rule add {rule_id}", shell=True)
-        print(f"Rule ID {rule_id} whitelisted successfully.")
-    except subprocess.CalledProcessError:
-        print(f"An error occurred while whitelisting Rule ID {rule_id}.")
 
 def extract_info_blocks(log_lines):
     info_blocks = []
@@ -23,7 +16,8 @@ def extract_info_blocks(log_lines):
     rule_pattern = re.compile(r"'rule': '(.*?)'")
     ip_pattern = re.compile(r"'attackers_ip': '(.*?)'")
     domain_pattern = re.compile(r"'domain': '(.*?)'")
-    message_pattern = re.compile(r"WAF: (.*?)'")  # Adjusted pattern
+    message_pattern = re.compile(r"WAF: (.*?)'")
+    name_pattern = re.compile(r"'name': '(.*?)'")  # Add name pattern
     info_start_pattern = re.compile(r"INFO\s+\[.*?\]")
 
     for log_line in log_lines:
@@ -34,14 +28,17 @@ def extract_info_blocks(log_lines):
             attackers_ip = attackers_ip_match.group(1) if attackers_ip_match else "N/A"
             domain_match = domain_pattern.search(log_line)
             domain = domain_match.group(1) if domain_match else "N/A"
-            message_match = message_pattern.search(log_line)  # Try to match the pattern
-            message = message_match.group(1) if message_match else "N/A"  # Handle None case
+            message_match = message_pattern.search(log_line)
+            message = message_match.group(1) if message_match else "N/A"
+            name_match = name_pattern.search(log_line)  # Extract 'name'
+            name = name_match.group(1) if name_match else "N/A"
             info_blocks.append({
                 'timestamp': timestamp,
                 'rule': rule,
                 'attackers_ip': attackers_ip,
                 'domain': domain,
-                'message': message
+                'message': message,
+                'name': name  # Add 'name' to the dictionary
             })
     return info_blocks
 
