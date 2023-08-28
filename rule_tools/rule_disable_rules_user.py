@@ -1,12 +1,12 @@
 import os
 import config
-import re  # Import the re module
+import re
 
 def append_rules_to_file(file_path, rule_ids):
     append_content = '\n'.join([f'SecRuleRemoveById {rule_id}' for rule_id in rule_ids])
     append_content_escaped = re.escape(append_content)  # Escape special characters
 
-    # Use the sed command to replace the </IfModule> tag with appended content and </IfModule> tag
+    # Use 'sed' to replace content within the </IfModule> tag.
     os.system(f"sudo sed -i '/<IfModule mod_security2.c>/,/<\\/IfModule>/ s/<\\/IfModule>/{append_content_escaped}\\n<\\/IfModule>/' {file_path}")
 
 def main():
@@ -45,7 +45,14 @@ def main():
     
     if rebuild_choice == "1":
         os.system('sudo /scripts/rebuildhttpdconf')
+        print("[OK] Rebuilt httpd.conf")
+    if rebuild_choice == "yes":
+        os.system('sudo /scripts/rebuildhttpdconf')
+        print("[OK] Rebuilt httpd.conf")
     elif rebuild_choice == "2":
+        import rule_tools.rule_tools_menu as rule_tools_menu
+        rule_tools_menu.show_menu()
+    elif rebuild_choice == "no":
         import rule_tools.rule_tools_menu as rule_tools_menu
         rule_tools_menu.show_menu()
     else:
