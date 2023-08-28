@@ -66,7 +66,7 @@ def run_check_rules_menu():
             print(f"Timestamp: {block['timestamp']}")
             print(f"Rule ID: {block['rule']}")
             print(f"Attacker's IP: {block['attackers_ip']}")
-            print(f"Domain: {block['domain']}")  # Include domain here
+            print(f"Domain: {block['domain']}")
             print(f"Message: {block['message']}")
             print("--------------------------------------------")
     else:
