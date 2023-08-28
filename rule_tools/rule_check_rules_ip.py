@@ -65,6 +65,7 @@ def run_check_rules_menu():
             print(f"Attacker's IP: {block['attackers_ip']}")
             print(f"Domain: {block['domain']}")
             print(f"Message: {block['message']}")
+            print(f"Name: {block['name']}")
             print("--------------------------------------------")
     else:
         print("No INFO Blocks found in logs for the specified IP address.")
