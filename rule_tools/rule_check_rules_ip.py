@@ -11,13 +11,13 @@ def search_modsec_ids(ip_address):
         return []
 
 def extract_info_blocks(log_lines):
-    info_blocks = []
     timestamp_pattern = re.compile(r'\[(.*?)\]')
     rule_pattern = re.compile(r"'rule': '(.*?)'")
     ip_pattern = re.compile(r"'attackers_ip': '(.*?)'")
     domain_pattern = re.compile(r"'domain': '(.*?)'")
     message_pattern = re.compile(r"WAF: (.*?)'")
-    name_pattern = re.compile(r"'name': '(.*?)'")  # Add name pattern
+    name_pattern = re.compile(r"'name': '(.*?)'")
+    abuser_pattern = re.compile(r"'abuser': '(.*?)'")
     info_start_pattern = re.compile(r"INFO\s+\[.*?\]")
 
     for log_line in log_lines:
