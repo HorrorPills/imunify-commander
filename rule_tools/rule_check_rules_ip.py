@@ -20,6 +20,8 @@ def extract_info_blocks(log_lines):
     abuser_pattern = re.compile(r"'abuser': '(.*?)'")
     info_start_pattern = re.compile(r"INFO\s+\[.*?\]")
 
+    info_blocks = []  # Define the info_blocks list here
+
     for log_line in log_lines:
         if info_start_pattern.match(log_line):
             timestamp = timestamp_pattern.search(log_line).group(1)
