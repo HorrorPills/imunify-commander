@@ -30,16 +30,18 @@ def extract_info_blocks(log_lines):
             domain = domain_match.group(1) if domain_match else "N/A"
             message_match = message_pattern.search(log_line)
             message = message_match.group(1) if message_match else "N/A"
-            name_match = name_pattern.search(log_line)  # Extract 'name'
-            name = name_match.group(1) if name_match else "N/A"
+            name_match = name_pattern.search(log_line)  # Add this line
+            name = name_match.group(1) if name_match else "N/A"  # Add this line
+
             info_blocks.append({
                 'timestamp': timestamp,
                 'rule': rule,
                 'attackers_ip': attackers_ip,
                 'domain': domain,
                 'message': message,
-                'name': name  # Add 'name' to the dictionary
+                'name': name  # Add this line
             })
+
     return info_blocks
 
 def run_check_rules_menu():
