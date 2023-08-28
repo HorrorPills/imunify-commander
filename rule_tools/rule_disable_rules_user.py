@@ -2,10 +2,7 @@ import os
 import config
 
 def append_rules_to_file(file_path, rule_ids):
-    # Prepare the content to append
     append_content = '\n'.join([f'SecRuleRemoveById {rule_id}' for rule_id in rule_ids])
-
-    # Use the sed command to replace the </IfModule> tag with appended content and </IfModule> tag
     os.system(f"sudo sed -i '/<IfModule mod_security2.c>/,/<\\/IfModule>/ s/<\\/IfModule>/{append_content}\\n<\\/IfModule>/' {file_path}")
 
 def main():
