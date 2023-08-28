@@ -23,7 +23,7 @@ def extract_info_blocks(log_lines):
     rule_pattern = re.compile(r"'rule': '(.*?)'")
     ip_pattern = re.compile(r"'attackers_ip': '(.*?)'")
     domain_pattern = re.compile(r"'domain': '(.*?)'")
-    message_pattern = re.compile(r"WAF: (.*?)'")
+    message_pattern = re.compile(r"WAF: (.*?)'")  # Adjusted pattern
     info_start_pattern = re.compile(r"INFO\s+\[.*?\]")
 
     for log_line in log_lines:
@@ -34,7 +34,8 @@ def extract_info_blocks(log_lines):
             attackers_ip = attackers_ip_match.group(1) if attackers_ip_match else "N/A"
             domain_match = domain_pattern.search(log_line)
             domain = domain_match.group(1) if domain_match else "N/A"
-            message = message_pattern.search(log_line).group(1)
+            message_match = message_pattern.search(log_line)  # Try to match the pattern
+            message = message_match.group(1) if message_match else "N/A"  # Handle None case
             info_blocks.append({
                 'timestamp': timestamp,
                 'rule': rule,
@@ -43,7 +44,6 @@ def extract_info_blocks(log_lines):
                 'message': message
             })
     return info_blocks
-
 
 def run_check_rules_menu():
     print("")
@@ -78,7 +78,7 @@ def run_check_rules_menu():
     print("+-------------------------------------------+")
     choice = input("Choose number: ")
 
-    if choice == "1":     
+    if choice == "1":
         import rule_tools.rule_tools_menu as rule_tools_menu
         rule_tools_menu.show_menu()
     else:
