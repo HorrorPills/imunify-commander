@@ -21,7 +21,7 @@ def show_list_control_menu():
         print("+-------------------------------------------+")
         print(f"IMUNIFY-COMMANDER {config.VERSION} | WEBD.pl")
         print("+-------------------------------------------+")
-        print("IP TOOLS | CONTROL")
+        print("MAIN MENU > IP TOOLS > CONTROL")
         print("+-------------------------------------------+")
         print("Menu:")
         print("1. Add IP to Whitelist/Blacklist")

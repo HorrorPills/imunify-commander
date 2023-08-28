@@ -8,7 +8,7 @@ def show_menu():
     print("+-------------------------------------------+")
     print(f"IMUNIFY-COMMANDER {config.VERSION} | WEBD.pl")
     print("+-------------------------------------------+")
-    print("SCAN TOOLS")
+    print("MAIN MENU > SCAN TOOLS")
     print("+-------------------------------------------+")
     print("Menu:")
     print("1. Scan Username")

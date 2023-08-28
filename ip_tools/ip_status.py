@@ -33,7 +33,7 @@ def run_check_ip_menu():
         print("+-------------------------------------------+")
         print(f"IMUNIFY-COMMANDER {config.VERSION} | WEBD.pl")
         print("+-------------------------------------------+")
-        print("IP TOOLS | STATUS")
+        print("MAIN MENU > IP TOOLS > STATUS")
         print("+-------------------------------------------+")
         print(f"Status for {ip_address}")
         print("+-------------------------------------------+")

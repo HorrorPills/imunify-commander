@@ -17,7 +17,7 @@ def run_scan_menu():
     print("+-------------------------------------------+")
     print(f"IMUNIFY-COMMANDER {config.VERSION} | WEBD.pl")
     print("+-------------------------------------------+")
-    print("SCAN TOOLS | SCAN CUSTOM PATH")
+    print("MAIN MENU > SCAN TOOLS > SCAN CUSTOM PATH")
     print("+-------------------------------------------+")
     path = input("Enter path to scan: ")
     start_malware_scan(path)

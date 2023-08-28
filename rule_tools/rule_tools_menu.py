@@ -8,7 +8,7 @@ def show_menu():
     print("+-------------------------------------------+")
     print(f"IMUNIFY-COMMANDER {config.VERSION} | WEBD.pl")
     print("+-------------------------------------------+")
-    print("RULE TOOLS")
+    print("MAIN MENU > RULE TOOLS")
     print("+-------------------------------------------+")
     print("Menu:")
     print("1. Check Rules for IP")

@@ -15,7 +15,7 @@ def main():
     print("+-------------------------------------------+")
     print(f"IMUNIFY-COMMANDER {config.VERSION} | WEBD.pl")
     print("+-------------------------------------------+")
-    print("RULE TOOLS | DISABLE RULE ID")
+    print("MAIN MENU > RULE TOOLS > DISABLE RULE ID")
     print("+-------------------------------------------+")
     username = input("Enter username: ")
     print("+-------------------------------------------+")

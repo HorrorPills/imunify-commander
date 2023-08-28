@@ -17,7 +17,7 @@ def run_scan_menu():
     print("+-------------------------------------------+")
     print(f"IMUNIFY-COMMANDER {config.VERSION} | WEBD.pl")
     print("+-------------------------------------------+")
-    print("SCAN TOOLS | SCAN USERNAME")
+    print("MAIN MENU > SCAN TOOLS > SCAN BY USERNAME")
     print("+-------------------------------------------+")
     username = input("Enter Username: ")
     start_malware_scan(username)

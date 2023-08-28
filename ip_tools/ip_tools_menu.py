@@ -8,7 +8,7 @@ def show_menu():
     print("+-------------------------------------------+")
     print(f"IMUNIFY-COMMANDER {config.VERSION} | WEBD.pl")
     print("+-------------------------------------------+")
-    print("IP TOOLS")
+    print("MAIN MENU > IP TOOLS")
     print("+-------------------------------------------+")
     print("Menu:")
     print("1. Whitelist/Blacklist Status")

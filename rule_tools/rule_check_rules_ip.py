@@ -50,7 +50,7 @@ def run_check_rules_menu():
     print("+-------------------------------------------+")
     print(f"IMUNIFY-COMMANDER {config.VERSION} | WEBD.pl")
     print("+-------------------------------------------+")
-    print("RULE TOOLS | CHECK RULES")
+    print("MAIN MENU > RULE TOOLS > LOOKUP RULES")
     print("+-------------------------------------------+")
     ip_address = input("Enter IP address: ")
 
