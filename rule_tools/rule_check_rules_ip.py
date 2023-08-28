@@ -30,8 +30,10 @@ def extract_info_blocks(log_lines):
             domain = domain_match.group(1) if domain_match else "N/A"
             message_match = message_pattern.search(log_line)
             message = message_match.group(1) if message_match else "N/A"
-            name_match = name_pattern.search(log_line)  # Add this line
-            name = name_match.group(1) if name_match else "N/A"  # Add this line
+            name_match = name_pattern.search(log_line)
+            name = name_match.group(1) if name_match else "N/A"
+            abuser_match = abuser_pattern.search(log_line)
+            abuser = abuser_match.group(1) if abuser_match else "N/A"
 
             info_blocks.append({
                 'timestamp': timestamp,
@@ -39,7 +41,8 @@ def extract_info_blocks(log_lines):
                 'attackers_ip': attackers_ip,
                 'domain': domain,
                 'message': message,
-                'name': name  # Add this line
+                'name': name,
+                'abuser': abuser
             })
 
     return info_blocks
@@ -65,6 +68,7 @@ def run_check_rules_menu():
             print(f"Timestamp: {block['timestamp']}")
             print(f"Rule ID: {block['rule']}")
             print(f"Attacker's IP: {block['attackers_ip']}")
+            print(f"Abuser's IP: {block['abuser']}")
             print(f"Domain: {block['domain']}")
             print(f"Message: {block['message']}")
             print(f"Name: {block['name']}")
