@@ -1,9 +1,13 @@
 import os
 import config
+import re  # Import the re module
 
 def append_rules_to_file(file_path, rule_ids):
     append_content = '\n'.join([f'SecRuleRemoveById {rule_id}' for rule_id in rule_ids])
-    os.system(f"sudo sed -i '/<IfModule mod_security2.c>/,/<\\/IfModule>/ s/<\\/IfModule>/{append_content}\\n<\\/IfModule>/' {file_path}")
+    append_content_escaped = re.escape(append_content)  # Escape special characters
+
+    # Use the sed command to replace the </IfModule> tag with appended content and </IfModule> tag
+    os.system(f"sudo sed -i '/<IfModule mod_security2.c>/,/<\\/IfModule>/ s/<\\/IfModule>/{append_content_escaped}\\n<\\/IfModule>/' {file_path}")
 
 def main():
     os.system('clear')
