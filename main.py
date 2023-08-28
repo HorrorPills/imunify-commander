@@ -8,10 +8,13 @@ def show_menu():
     print("+-------------------------------------------+")
     print(f"IMUNIFY-COMMANDER {config.VERSION} | WEBD.pl")
     print("+-------------------------------------------+")
+    print("MAIN MENU")
+    print("+-------------------------------------------+")
     print("Menu:")
     print("1. IP Tools")
     print("2. Rule Tools")
-    print("3. Scan Toos")
+    print("3. Scan Tools")
+    print("4. Exit")
     print("+-------------------------------------------+")
     choice = input("Choose number: ")
     
@@ -24,8 +27,11 @@ def show_menu():
     elif choice == "3":
         import scan_tools.scan_tools_menu as scan_tools_menu
         scan_tools_menu.show_menu()
+    elif choice == "4":
+        exit()
     else:
         print("Invalid choice. Please choose a valid option.")
+        input("Press Enter to continue...")
         show_menu()
 
 if __name__ == "__main__":
