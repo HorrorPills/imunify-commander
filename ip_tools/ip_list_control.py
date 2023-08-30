@@ -2,7 +2,6 @@ import subprocess
 import os
 import config
 import time
-#import ip_tools_menu
 
 SECONDS_IN_A_DAY = 24 * 60 * 60
 
@@ -17,6 +16,7 @@ def add_ip_to_whitelist(ip_address, expiration_days):
     expiration_seconds = expiration_days * SECONDS_IN_A_DAY
     expiration_timestamp = current_timestamp + expiration_seconds
     subprocess.run(f"sudo imunify360-agent whitelist ip add {ip_address} --expiration {expiration_timestamp}", shell=True)
+
 
 def remove_ip_from_blacklist(ip_address):
     subprocess.run(f"sudo imunify360-agent blacklist ip delete {ip_address}", shell=True)
