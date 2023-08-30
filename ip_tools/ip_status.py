@@ -1,6 +1,9 @@
 import subprocess
 import os
 import config
+import time
+
+SECONDS_IN_A_DAY = 24 * 60 * 60
 
 def is_ip_in_blacklist(ip_address):
     try:
@@ -46,7 +49,6 @@ def run_check_ip_menu():
         print(f"Status for {ip_address}")
         print("+-------------------------------------------+")
         print(f"Blacklist: {is_blacklisted}")
-        print(f"Whitelist: {is_whitelisted}")
         print(f"Expiration: {expiration_status}")
         print("+-------------------------------------------+")
         print("1. Check Status of another IP Address")
