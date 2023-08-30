@@ -43,7 +43,7 @@ def show_list_control_menu():
         choice = input("Choose number: ")
 
         if choice == "1":
-            ip_address = input("Enter IP address: ")
+            ip_address = input("Enter IP address to add: ")
             expiration_days = int(input("Enter expiration (days): "))
             print("Adding IP to:")
             print("1. Blacklist")
@@ -57,7 +57,7 @@ def show_list_control_menu():
             else:
                 print("Invalid choice. Please choose a valid option.")
         elif choice == "2":
-            ip_address = input("Enter IP address: ")
+            ip_address = input("Enter IP address to remove: ")
             print("Removing IP from:")
             print("1. Blacklist")
             print("2. Whitelist")
