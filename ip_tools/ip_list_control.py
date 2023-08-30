@@ -3,8 +3,11 @@ import os
 import config
 #import ip_tools_menu
 
-def add_ip_to_blacklist(ip_address):
-    subprocess.run(f"sudo imunify360-agent blacklist ip add {ip_address}", shell=True)
+SECONDS_IN_A_DAY = 24 * 60 * 60
+
+def add_ip_to_blacklist(ip_address, expiration_days):
+    expiration_seconds = expiration_days * SECONDS_IN_A_DAY
+    subprocess.run(f"sudo imunify360-agent blacklist ip add {ip_address} --expiration {expiration_seconds}", shell=True)
 
 def remove_ip_from_blacklist(ip_address):
     subprocess.run(f"sudo imunify360-agent blacklist ip delete {ip_address}", shell=True)
@@ -32,13 +35,14 @@ def show_list_control_menu():
 
         if choice == "1":
             ip_address = input("Enter IP address: ")
+            expiration_days = int(input("Enter expiration days: "))
             print("Adding IP to:")
             print("1. Blacklist")
             print("2. Whitelist")
             print("+-------------------------------------------+")
             action_choice = input("Choose number: ")
             if action_choice == "1":
-                add_ip_to_blacklist(ip_address)
+                add_ip_to_blacklist(ip_address, expiration_days)
             elif action_choice == "2":
                 add_ip_to_whitelist(ip_address)
             else:
