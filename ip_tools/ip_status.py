@@ -23,9 +23,16 @@ def is_ip_in_whitelist(ip_address):
 def get_ip_expiration(ip_address):
     try:
         output = subprocess.check_output(f"sudo sqlite3 /var/imunify360/imunify360.db 'select * from iplist where ip=\"{ip_address}\"'", shell=True)
-        expiration_str = output.split(b'|')[3].decode('utf-8')
-        expiration_timestamp = int(datetime.strptime(expiration_str, "%Y-%m-%d %H:%M:%S").timestamp())
-        return expiration_timestamp
+        fields = output.split(b'|')
+        if len(fields) >= 4:
+            expiration_str = fields[3].decode('utf-8')
+            try:
+                expiration_timestamp = int(datetime.strptime(expiration_str, "%Y-%m-%d %H:%M:%S").timestamp())
+                return expiration_timestamp
+            except ValueError:
+                return None
+        else:
+            return None
     except subprocess.CalledProcessError:
         return None
 
