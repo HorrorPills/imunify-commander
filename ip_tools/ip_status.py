@@ -12,6 +12,13 @@ def is_ip_in_blacklist(ip_address):
     except subprocess.CalledProcessError:
         return False
 
+def is_ip_in_whitelist(ip_address):
+    try:
+        output = subprocess.check_output(f"sudo imunify360-agent whitelist ip list | grep {ip_address}", shell=True)
+        return True if output else False
+    except subprocess.CalledProcessError:
+        return False
+
 def get_ip_expiration(ip_address):
     try:
         output = subprocess.check_output(f"sudo sqlite3 /var/imunify360/imunify360.db 'select * from iplist' | grep {ip_address}'", shell=True)
@@ -30,6 +37,7 @@ def run_check_ip_menu():
             ip_tools_menu.show_menu()
         
         is_blacklisted = is_ip_in_blacklist(ip_address)
+        is_whitelisted = is_ip_in_whitelist(ip_address)
         expiration_timestamp = get_ip_expiration(ip_address)
         
         if expiration_timestamp is not None:
@@ -49,6 +57,7 @@ def run_check_ip_menu():
         print(f"Status for {ip_address}")
         print("+-------------------------------------------+")
         print(f"Blacklist: {is_blacklisted}")
+        print(f"Whitelist: {is_whitelisted}")
         print(f"Expiration: {expiration_status}")
         print("+-------------------------------------------+")
         print("1. Check Status of another IP Address")
