@@ -25,18 +25,14 @@ def get_ip_expiration(ip_address):
         output = subprocess.check_output(f"sudo sqlite3 /var/imunify360/imunify360.db 'select * from iplist' | grep \"{ip_address}\"", shell=True)
         fields = output.split(b'|')
         if len(fields) >= 5:
-            expiration_str = fields[4].decode('utf-8')
-            try:
-                expiration_timestamp = int(expiration_str)
-                current_timestamp = int(time.time())
-                time_remaining = expiration_timestamp - current_timestamp
-                return time_remaining
-            except ValueError:
-                return None
+            expiration_timestamp = int(fields[2])
+            expiration_date = datetime.fromtimestamp(expiration_timestamp).strftime('%Y-%m-%d %H:%M:%S')
+            added_info = fields[5].decode('utf-8')
+            return expiration_timestamp, expiration_date, added_info
         else:
-            return None
+            return None, None, None
     except subprocess.CalledProcessError:
-        return None
+        return None, None, None
 
 def run_check_ip_menu():
     while True:
