@@ -2,6 +2,7 @@ import subprocess
 import os
 import config
 import time
+from datetime import datetime
 
 SECONDS_IN_A_DAY = 24 * 60 * 60
 
@@ -22,8 +23,9 @@ def is_ip_in_whitelist(ip_address):
 def get_ip_expiration(ip_address):
     try:
         output = subprocess.check_output(f"sudo sqlite3 /var/imunify360/imunify360.db 'select * from iplist where ip=\"{ip_address}\"'", shell=True)
-        expiration_timestamp = output.split()[3]
-        return int(expiration_timestamp)
+        expiration_str = output.split()[3].decode('utf-8')
+        expiration_timestamp = int(datetime.strptime(expiration_str, "%Y-%m-%d").timestamp())
+        return expiration_timestamp
     except subprocess.CalledProcessError:
         return None
 
