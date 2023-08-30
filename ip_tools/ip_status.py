@@ -26,12 +26,12 @@ def get_ip_expiration(ip_address):
         fields = output.split(b'|')
         if len(fields) >= 5:
             expiration_timestamp = int(fields[2])
-            added_info = fields[5].decode('utf-8')
-            return expiration_timestamp, added_info
+            expiration_date = datetime.fromtimestamp(expiration_timestamp).strftime('%Y-%m-%d %H:%M:%S')
+            return expiration_date
         else:
-            return None, None
+            return "Not found"
     except subprocess.CalledProcessError:
-        return None, None
+        return "Not found"
 
 def run_check_ip_menu():
     while True:
@@ -44,15 +44,8 @@ def run_check_ip_menu():
         
         is_blacklisted = is_ip_in_blacklist(ip_address)
         is_whitelisted = is_ip_in_whitelist(ip_address)
-        expiration_timestamp, added_info = get_ip_expiration(ip_address)
+        expiration_date = get_ip_expiration(ip_address)
         
-        if expiration_timestamp is not None:
-            current_timestamp = int(time.time())
-            days_until_expiration = max(0, (expiration_timestamp - current_timestamp) // SECONDS_IN_A_DAY)
-            expiration_status = f"{days_until_expiration} days"
-        else:
-            expiration_status = "Not found"
-
         os.system('clear')
         print("")
         print("+-------------------------------------------+")
@@ -64,14 +57,7 @@ def run_check_ip_menu():
         print("+-------------------------------------------+")
         print(f"Blacklist: {is_blacklisted}")
         print(f"Whitelist: {is_whitelisted}")
-        if added_info is not None:
-            print(f"Info: {added_info}")
-        else:
-            print("Info: Not found")
-        if expiration_timestamp is not None:
-            print(f"Expiration: {expiration_timestamp}")
-        else:
-            print("Expiration: Not found")
+        print(f"Expiration: {expiration_date}")
         print("+-------------------------------------------+")
         print("1. Check Status of another IP Address")
         print("2. Back")
