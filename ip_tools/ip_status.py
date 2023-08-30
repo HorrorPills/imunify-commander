@@ -26,13 +26,11 @@ def get_ip_expiration(ip_address):
         fields = output.split(b'|')
         if len(fields) >= 5:
             expiration_timestamp = int(fields[2])
-            expiration_date = datetime.fromtimestamp(expiration_timestamp).strftime('%Y-%m-%d %H:%M:%S')
-            added_info = fields[5].decode('utf-8')
-            return expiration_timestamp, expiration_date, added_info
+            return expiration_timestamp
         else:
-            return None, None, None
+            return None
     except subprocess.CalledProcessError:
-        return None, None, None
+        return None
 
 def run_check_ip_menu():
     while True:
@@ -65,7 +63,14 @@ def run_check_ip_menu():
         print("+-------------------------------------------+")
         print(f"Blacklist: {is_blacklisted}")
         print(f"Whitelist: {is_whitelisted}")
-        print(f"Expiration: {expiration_status}")
+        if expiration_timestamp is not None:
+            expiration_date = datetime.fromtimestamp(expiration_timestamp).strftime('%Y-%m-%d %H:%M:%S')
+            added_info = get_ip_expiration(ip_address)
+            print(f"Info: {added_info}")
+            print(f"Expiration: {expiration_timestamp}")
+        else:
+            print("Info: Not found")
+            print("Expiration: Not found")
         print("+-------------------------------------------+")
         print("1. Check Status of another IP Address")
         print("2. Back")
