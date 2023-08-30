@@ -20,6 +20,13 @@ def is_ip_in_whitelist(ip_address):
     except subprocess.CalledProcessError:
         return False
 
+def is_ip_in_graylist(ip_address):
+    try:
+        output = subprocess.check_output(f"sudo imunify360-agent graylist ip list --by-ip {ip_address} | grep {ip_address}", shell=True)
+        return True if output else False
+    except subprocess.CalledProcessError:
+        return False
+
 def get_ip_expiration(ip_address):
     try:
         output = subprocess.check_output(f"sudo sqlite3 /var/imunify360/imunify360.db 'select * from iplist' | grep \"{ip_address}\"", shell=True)
@@ -44,6 +51,7 @@ def run_check_ip_menu():
         
         is_blacklisted = is_ip_in_blacklist(ip_address)
         is_whitelisted = is_ip_in_whitelist(ip_address)
+        is_graylisted = is_ip_in_graylist(ip_address)
         expiration_timestamp, expiration_date = get_ip_expiration(ip_address)
         
         if expiration_timestamp is not None:
@@ -64,6 +72,7 @@ def run_check_ip_menu():
         print("+-------------------------------------------+")
         print(f"Blacklist: {is_blacklisted}")
         print(f"Whitelist: {is_whitelisted}")
+        print(f"Graylist: {is_graylisted}")
         print(f"Expiration: {expiration_status}")
         if expiration_date:
             print(f"Expiration Date: {expiration_date}")
