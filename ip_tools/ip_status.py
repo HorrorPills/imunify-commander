@@ -48,7 +48,7 @@ def run_check_ip_menu():
         
         if expiration_timestamp is not None:
             current_timestamp = int(time.time())
-            days_until_expiration = max(0, (expiration_timestamp - current_timestamp) // SECONDS_IN_A_DAY)
+            days_until_expiration = max(0, (expiration_timestamp - current_timestamp) // SECONDS_IN_A_DAY + 1)
             expiration_status = f"{days_until_expiration} days"
         else:
             expiration_status = "Not found"
