@@ -72,7 +72,7 @@ def run_check_ip_menu():
         print("+-------------------------------------------+")
         print(f"Blacklist: {is_blacklisted}")
         print(f"Whitelist: {is_whitelisted}")
-        print(f"Graylist: {is_graylisted}")
+        print(f"Graylist (Captcha): {is_graylisted}")
         print(f"Expiration: {expiration_status}")
         if expiration_date:
             print(f"Expiration Date: {expiration_date}")
