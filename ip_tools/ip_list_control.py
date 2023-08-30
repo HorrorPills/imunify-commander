@@ -20,9 +20,6 @@ def add_ip_to_whitelist(ip_address, expiration_days):
 def remove_ip_from_blacklist(ip_address):
     subprocess.run(f"sudo imunify360-agent blacklist ip delete {ip_address}", shell=True)
 
-def add_ip_to_whitelist(ip_address):
-    subprocess.run(f"sudo imunify360-agent whitelist ip add {ip_address}", shell=True)
-
 def remove_ip_from_whitelist(ip_address):
     subprocess.run(f"sudo imunify360-agent whitelist ip delete {ip_address}", shell=True)
 
