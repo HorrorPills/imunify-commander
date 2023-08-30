@@ -1,9 +1,6 @@
 import subprocess
 import os
 import config
-import time
-
-SECONDS_IN_A_DAY = 24 * 60 * 60
 
 def is_ip_in_blacklist(ip_address):
     try:
@@ -12,12 +9,11 @@ def is_ip_in_blacklist(ip_address):
     except subprocess.CalledProcessError:
         return False
 
-def get_whitelist_expiration(ip_address):
+def get_ip_expiration(ip_address):
     try:
-        output = subprocess.check_output(f"sudo imunify360-agent whitelist ip list --by-ip {ip_address} | grep {ip_address}", shell=True)
-        expiration_seconds = int(output.strip().split()[4])
-        expiration_days = expiration_seconds // SECONDS_IN_A_DAY
-        return expiration_days
+        output = subprocess.check_output(f"sudo sqlite3 /var/imunify360/imunify360.db 'select * from iplist' | grep {ip_address}'", shell=True)
+        expiration_timestamp = output.split()[3]
+        return int(expiration_timestamp)
     except subprocess.CalledProcessError:
         return None
 
@@ -31,9 +27,15 @@ def run_check_ip_menu():
             ip_tools_menu.show_menu()
         
         is_blacklisted = is_ip_in_blacklist(ip_address)
-        is_whitelisted = is_ip_in_whitelist(ip_address)
-        whitelist_expiration = get_whitelist_expiration(ip_address)
+        expiration_timestamp = get_ip_expiration(ip_address)
         
+        if expiration_timestamp is not None:
+            current_timestamp = int(time.time())
+            days_until_expiration = max(0, (expiration_timestamp - current_timestamp) // SECONDS_IN_A_DAY)
+            expiration_status = f"{days_until_expiration} days"
+        else:
+            expiration_status = "Not found"
+
         os.system('clear')
         print("")
         print("+-------------------------------------------+")
@@ -45,8 +47,7 @@ def run_check_ip_menu():
         print("+-------------------------------------------+")
         print(f"Blacklist: {is_blacklisted}")
         print(f"Whitelist: {is_whitelisted}")
-        if is_whitelisted and whitelist_expiration is not None:
-            print(f"Expiration: {whitelist_expiration} days")
+        print(f"Expiration: {expiration_status}")
         print("+-------------------------------------------+")
         print("1. Check Status of another IP Address")
         print("2. Back")
